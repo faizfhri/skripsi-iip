@@ -442,8 +442,14 @@ async function submitSurvey() {
     showLoading(true);
 
     // Kumpulkan semua data
+    // Timestamp dengan zona waktu WIB (UTC+7)
+    const now = new Date();
+    const wibOffset = 7 * 60; // WIB is UTC+7
+    const wibTime = new Date(now.getTime() + wibOffset * 60 * 1000);
+    const timestamp = wibTime.toISOString().replace('T', ' ').substring(0, 19) + ' WIB';
+    
     const formData = {
-        timestamp: new Date().toISOString(),
+        timestamp: timestamp,
         
         // Data Diri
         nama: document.getElementById('nama').value,
