@@ -43,7 +43,7 @@
 
                 <h3>Prosedur Penelitian</h3>
                 <p>Apabila Anda setuju untuk berpartisipasi pada pilot studi ini, Anda akan diminta untuk mengisi data diri dan pengalaman membeli produk berkonsep donasi yang tersedia di dalam formulir ini. Estimasi pengisian formulir adalah <strong>1-2 menit</strong>.</p>
-                <p>Setelah Anda mengirim formulir ini, dalam jangka waktu dua hari, peneliti akan menghubungi Anda melalui <strong>email</strong> beserta pengingat melalui pesan pribadi pada aplikasi <em>Whatsapp</em> untuk <strong>pelaksanaan eksperimen secara daring</strong> dengan waktu pengerjaan yang <strong>fleksibel</strong>. Seluruh proses eksperimen akan dilakukan melalui <strong><em>Google Forms</em></strong> dengan estimasi waktu untuk proses pengambilan data adalah <strong>3-5 menit</strong>.</p>
+                <p>Setelah Anda mengirim formulir ini, dalam jangka waktu dua hari, peneliti akan menghubungi Anda melalui <strong>email</strong> beserta pengingat melalui pesan pribadi pada aplikasi <em>Whatsapp</em> untuk <strong>pelaksanaan eksperimen secara daring</strong> dengan waktu pengerjaan yang <strong>fleksibel</strong>. Estimasi waktu untuk proses pengambilan data adalah <strong>3-5 menit</strong>.</p>
             </div>
             <div class="button-group">
                 <button class="btn-secondary" onclick="prevSection()">Kembali</button>
@@ -126,6 +126,9 @@
                     <label for="usia">Usia <span class="required">*</span></label>
                     <input type="number" id="usia" class="form-control" min="18" max="40" required>
                     <small style="color: #6c757d; margin-top: 5px; display: block;">Harus berusia 18-40 tahun</small>
+                    <div id="usia-error" class="field-error" style="display: none;">
+                        <strong>❌ Usia tidak memenuhi kriteria:</strong> Penelitian ini ditujukan untuk usia 18-40 tahun.
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -154,6 +157,9 @@
                             <span>Ya</span>
                         </label>
                     </div>
+                    <div id="marketing-error" class="field-error" style="display: none;">
+                        <strong>❌ Tidak memenuhi kriteria:</strong> Penelitian ini membutuhkan responden yang tidak memiliki pengalaman di bidang marketing untuk menghindari bias.
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -168,6 +174,9 @@
                             <input type="radio" name="digital-active" value="Tidak" required>
                             <span>Tidak</span>
                         </label>
+                    </div>
+                    <div id="digital-error" class="field-error" style="display: none;">
+                        <strong>❌ Tidak memenuhi kriteria:</strong> Penelitian ini membutuhkan responden yang aktif menggunakan media digital karena stimulus berkaitan dengan konten digital.
                     </div>
                 </div>
             </div>

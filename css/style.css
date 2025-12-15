@@ -171,6 +171,33 @@ h2 {
     border-color: var(--primary-color);
 }
 
+/* Error message styling */
+.field-error {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 12px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    animation: slideDown 0.3s ease-out;
+}
+
+.field-error strong {
+    color: #856404;
+    display: block;
+    margin-bottom: 4px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Radio Groups */
 .radio-group {
     display: flex;
@@ -252,14 +279,11 @@ h2 {
     justify-content: space-between;
     margin-bottom: 15px;
     font-weight: 600;
+    color: var(--text-color);
 }
 
-.label-left {
-    color: var(--danger-color);
-}
-
-.label-right {
-    color: var(--success-color);
+.label-left, .label-right {
+    color: var(--text-color);
 }
 
 .scale-options {

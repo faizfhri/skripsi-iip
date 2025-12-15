@@ -22,6 +22,7 @@ const sections = [
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
     initializeConsentCheckboxes();
+    initializeScreeningValidation();
     updateProgressBar();
 });
 
@@ -124,7 +125,103 @@ function validateAndNext(sectionId) {
     }
 }
 
-// ===== SCREENING VALIDATION =====
+// ===== REAL-TIME SCREENING VALIDATION =====
+let screeningValidation = {
+    age: false,
+    marketing: false,
+    digital: false
+};
+
+function initializeScreeningValidation() {
+    const usiaInput = document.getElementById('usia');
+    const marketingRadios = document.querySelectorAll('input[name="marketing-exp"]');
+    const digitalRadios = document.querySelectorAll('input[name="digital-active"]');
+    const nextButton = document.querySelector('#section-demografi .btn-next');
+    
+    // Age validation
+    usiaInput.addEventListener('blur', function() {
+        const age = parseInt(this.value);
+        const errorDiv = document.getElementById('usia-error');
+        
+        if (this.value && (age < 18 || age > 40)) {
+            errorDiv.style.display = 'block';
+            screeningValidation.age = false;
+        } else if (this.value) {
+            errorDiv.style.display = 'none';
+            screeningValidation.age = true;
+        } else {
+            errorDiv.style.display = 'none';
+            screeningValidation.age = false;
+        }
+        updateNextButton(nextButton);
+    });
+    
+    usiaInput.addEventListener('input', function() {
+        const age = parseInt(this.value);
+        const errorDiv = document.getElementById('usia-error');
+        
+        if (this.value && (age < 18 || age > 40)) {
+            errorDiv.style.display = 'block';
+            screeningValidation.age = false;
+        } else if (this.value) {
+            errorDiv.style.display = 'none';
+            screeningValidation.age = true;
+        } else {
+            screeningValidation.age = false;
+        }
+        updateNextButton(nextButton);
+    });
+    
+    // Marketing experience validation
+    marketingRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const errorDiv = document.getElementById('marketing-error');
+            
+            if (this.value === 'Ya') {
+                errorDiv.style.display = 'block';
+                screeningValidation.marketing = false;
+            } else {
+                errorDiv.style.display = 'none';
+                screeningValidation.marketing = true;
+            }
+            updateNextButton(nextButton);
+        });
+    });
+    
+    // Digital active validation
+    digitalRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const errorDiv = document.getElementById('digital-error');
+            
+            if (this.value === 'Tidak') {
+                errorDiv.style.display = 'block';
+                screeningValidation.digital = false;
+            } else {
+                errorDiv.style.display = 'none';
+                screeningValidation.digital = true;
+            }
+            updateNextButton(nextButton);
+        });
+    });
+}
+
+function updateNextButton(button) {
+    const allValid = screeningValidation.age && 
+                     screeningValidation.marketing && 
+                     screeningValidation.digital;
+    
+    if (allValid) {
+        button.disabled = false;
+        button.style.opacity = '1';
+        button.style.cursor = 'pointer';
+    } else {
+        button.disabled = true;
+        button.style.opacity = '0.5';
+        button.style.cursor = 'not-allowed';
+    }
+}
+
+// ===== SCREENING VALIDATION (simplified) =====
 function validateDemografiAndNext() {
     const section = document.getElementById('section-demografi');
     const inputs = section.querySelectorAll('input[required], select[required]');
@@ -152,30 +249,7 @@ function validateDemografiAndNext() {
         return;
     }
     
-    // Screening criteria
-    const usia = parseInt(document.getElementById('usia').value);
-    const marketingExp = document.querySelector('input[name="marketing-exp"]:checked')?.value;
-    const digitalActive = document.querySelector('input[name="digital-active"]:checked')?.value;
-    
-    // Check age range
-    if (usia < 18 || usia > 40) {
-        showDisqualified('age', usia);
-        return;
-    }
-    
-    // Check marketing experience
-    if (marketingExp === 'Ya') {
-        showDisqualified('marketing');
-        return;
-    }
-    
-    // Check digital media usage
-    if (digitalActive === 'Tidak') {
-        showDisqualified('digital');
-        return;
-    }
-    
-    // Pass all screening
+    // All validation already done real-time, just proceed
     nextSection();
 }
 
