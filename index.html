@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Penelitian</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Section 1: Penjelasan Awal -->
+        <section id="section-intro" class="section active">
+            <h1>Selamat Datang</h1>
+            <div class="content-box">
+                <h2>Penjelasan Penelitian</h2>
+                <p>Terima kasih atas kesediaan Anda untuk berpartisipasi dalam penelitian ini.</p>
+                <p>Penelitian ini bertujuan untuk memahami persepsi konsumen terhadap produk. Anda akan diminta untuk:</p>
+                <ul>
+                    <li>Mengisi data diri singkat</li>
+                    <li>Menjawab beberapa pertanyaan tentang pengalaman membeli produk</li>
+                    <li>Melihat stimulus berupa poster produk</li>
+                    <li>Memberikan penilaian terhadap produk tersebut</li>
+                </ul>
+                <p>Waktu pengisian: <strong>±10-15 menit</strong></p>
+                <p>Data Anda akan dijaga kerahasiaannya dan hanya digunakan untuk kepentingan akademis.</p>
+            </div>
+            <button class="btn-primary" onclick="nextSection()">Lanjutkan</button>
+        </section>
+
+        <!-- Section 2: Informed Consent -->
+        <section id="section-consent" class="section">
+            <h1>Informed Consent</h1>
+            <div class="content-box">
+                <p>Sebelum melanjutkan, mohon baca dan centang pernyataan berikut:</p>
+                
+                <div class="consent-items">
+                    <label class="consent-item">
+                        <input type="checkbox" class="consent-checkbox" id="consent1">
+                        <span>Saya telah membaca dan memahami tujuan penelitian ini</span>
+                    </label>
+                    
+                    <label class="consent-item">
+                        <input type="checkbox" class="consent-checkbox" id="consent2">
+                        <span>Saya memahami bahwa partisipasi saya bersifat sukarela dan dapat mengundurkan diri kapan saja</span>
+                    </label>
+                    
+                    <label class="consent-item">
+                        <input type="checkbox" class="consent-checkbox" id="consent3">
+                        <span>Saya memahami bahwa data saya akan dijaga kerahasiaannya</span>
+                    </label>
+                    
+                    <label class="consent-item">
+                        <input type="checkbox" class="consent-checkbox" id="consent4">
+                        <span>Saya memahami bahwa data yang saya berikan akan digunakan untuk kepentingan akademis</span>
+                    </label>
+                    
+                    <label class="consent-item">
+                        <input type="checkbox" class="consent-checkbox" id="consent5">
+                        <span>Saya bersedia berpartisipasi dalam penelitian ini</span>
+                    </label>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevSection()">Kembali</button>
+                <button class="btn-primary" id="consentBtn" disabled onclick="nextSection()">Setuju & Lanjutkan</button>
+            </div>
+        </section>
+
+        <!-- Section 3: Data Diri -->
+        <section id="section-demografi" class="section">
+            <h1>Data Diri</h1>
+            <div class="content-box">
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap <span class="required">*</span></label>
+                    <input type="text" id="nama" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="usia">Usia <span class="required">*</span></label>
+                    <input type="number" id="usia" class="form-control" min="17" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Jenis Kelamin <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="Laki-laki" required>
+                            <span>Laki-laki</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="gender" value="Perempuan" required>
+                            <span>Perempuan</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pendidikan">Pendidikan Terakhir <span class="required">*</span></label>
+                    <select id="pendidikan" class="form-control" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="SMA/Sederajat">SMA/Sederajat</option>
+                        <option value="D3">D3</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pekerjaan">Pekerjaan <span class="required">*</span></label>
+                    <input type="text" id="pekerjaan" class="form-control" required>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevSection()">Kembali</button>
+                <button class="btn-primary" onclick="validateAndNext('section-demografi')">Lanjutkan</button>
+            </div>
+        </section>
+
+        <!-- Section 4: Pengalaman Membeli -->
+        <section id="section-experience" class="section">
+            <h1>Pengalaman Membeli Produk</h1>
+            <div class="content-box">
+                <div class="form-group">
+                    <label>Seberapa sering Anda berbelanja produk secara online? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="freq-online" value="Tidak pernah" required>
+                            <span>Tidak pernah</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="freq-online" value="Jarang (1-2x per tahun)" required>
+                            <span>Jarang (1-2x per tahun)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="freq-online" value="Kadang-kadang (3-6x per tahun)" required>
+                            <span>Kadang-kadang (3-6x per tahun)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="freq-online" value="Sering (>6x per tahun)" required>
+                            <span>Sering (>6x per tahun)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Apakah Anda pernah membeli produk serupa sebelumnya? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="purchase-exp" value="Belum pernah" required>
+                            <span>Belum pernah</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="purchase-exp" value="Pernah" required>
+                            <span>Pernah</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Hal apa yang paling mempengaruhi keputusan pembelian Anda? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="decision-factor" value="Harga" required>
+                            <span>Harga</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="decision-factor" value="Kualitas" required>
+                            <span>Kualitas</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="decision-factor" value="Merek" required>
+                            <span>Merek</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="decision-factor" value="Rekomendasi" required>
+                            <span>Rekomendasi</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="decision-factor" value="Desain/Tampilan" required>
+                            <span>Desain/Tampilan</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevSection()">Kembali</button>
+                <button class="btn-primary" onclick="assignGroupAndShowStimulus()">Lanjutkan</button>
+            </div>
+        </section>
+
+        <!-- Section 5: Stimulus -->
+        <section id="section-stimulus" class="section">
+            <h1>Stimulus Produk</h1>
+            <div class="content-box">
+                <p>Silakan perhatikan gambar produk berikut dengan seksama:</p>
+                <div class="stimulus-container">
+                    <img id="stimulusImage" src="" alt="Stimulus Produk">
+                </div>
+                <p class="stimulus-note">Setelah Anda memperhatikan gambar di atas, silakan lanjutkan untuk memberikan penilaian Anda.</p>
+                <div id="timerDisplay" class="timer-display"></div>
+            </div>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevSection()">Kembali</button>
+                <button class="btn-primary" id="stimulusNextBtn" disabled onclick="nextSection()">Lanjutkan</button>
+            </div>
+        </section>
+
+        <!-- Section 6: Skala Pengukuran -->
+        <section id="section-scale" class="section">
+            <h1>Skala Penilaian</h1>
+            <div class="content-box">
+                <p>Berdasarkan stimulus yang telah Anda lihat, berikan penilaian Anda dengan memilih angka yang sesuai:</p>
+                
+                <!-- Item 1 -->
+                <div class="scale-item">
+                    <div class="scale-labels">
+                        <span class="label-left">Tidak Pernah Berniat Membeli</span>
+                        <span class="label-right">Pasti Berniat Membeli</span>
+                    </div>
+                    <div class="scale-options">
+                        <label><input type="radio" name="scale1" value="1" required><span>1</span></label>
+                        <label><input type="radio" name="scale1" value="2" required><span>2</span></label>
+                        <label><input type="radio" name="scale1" value="3" required><span>3</span></label>
+                        <label><input type="radio" name="scale1" value="4" required><span>4</span></label>
+                        <label><input type="radio" name="scale1" value="5" required><span>5</span></label>
+                        <label><input type="radio" name="scale1" value="6" required><span>6</span></label>
+                        <label><input type="radio" name="scale1" value="7" required><span>7</span></label>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="scale-item">
+                    <div class="scale-labels">
+                        <span class="label-left">Jelas Tidak Berniat Membeli</span>
+                        <span class="label-right">Jelas Berniat Membeli</span>
+                    </div>
+                    <div class="scale-options">
+                        <label><input type="radio" name="scale2" value="1" required><span>1</span></label>
+                        <label><input type="radio" name="scale2" value="2" required><span>2</span></label>
+                        <label><input type="radio" name="scale2" value="3" required><span>3</span></label>
+                        <label><input type="radio" name="scale2" value="4" required><span>4</span></label>
+                        <label><input type="radio" name="scale2" value="5" required><span>5</span></label>
+                        <label><input type="radio" name="scale2" value="6" required><span>6</span></label>
+                        <label><input type="radio" name="scale2" value="7" required><span>7</span></label>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="scale-item">
+                    <div class="scale-labels">
+                        <span class="label-left">Minat Beli Sangat Rendah</span>
+                        <span class="label-right">Minat Beli Sangat Tinggi</span>
+                    </div>
+                    <div class="scale-options">
+                        <label><input type="radio" name="scale3" value="1" required><span>1</span></label>
+                        <label><input type="radio" name="scale3" value="2" required><span>2</span></label>
+                        <label><input type="radio" name="scale3" value="3" required><span>3</span></label>
+                        <label><input type="radio" name="scale3" value="4" required><span>4</span></label>
+                        <label><input type="radio" name="scale3" value="5" required><span>5</span></label>
+                        <label><input type="radio" name="scale3" value="6" required><span>6</span></label>
+                        <label><input type="radio" name="scale3" value="7" required><span>7</span></label>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="scale-item">
+                    <div class="scale-labels">
+                        <span class="label-left">Jelas Tidak Akan Membeli</span>
+                        <span class="label-right">Jelas Akan Membeli</span>
+                    </div>
+                    <div class="scale-options">
+                        <label><input type="radio" name="scale4" value="1" required><span>1</span></label>
+                        <label><input type="radio" name="scale4" value="2" required><span>2</span></label>
+                        <label><input type="radio" name="scale4" value="3" required><span>3</span></label>
+                        <label><input type="radio" name="scale4" value="4" required><span>4</span></label>
+                        <label><input type="radio" name="scale4" value="5" required><span>5</span></label>
+                        <label><input type="radio" name="scale4" value="6" required><span>6</span></label>
+                        <label><input type="radio" name="scale4" value="7" required><span>7</span></label>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="scale-item">
+                    <div class="scale-labels">
+                        <span class="label-left">Mungkin Tidak Membeli</span>
+                        <span class="label-right">Mungkin Membeli</span>
+                    </div>
+                    <div class="scale-options">
+                        <label><input type="radio" name="scale5" value="1" required><span>1</span></label>
+                        <label><input type="radio" name="scale5" value="2" required><span>2</span></label>
+                        <label><input type="radio" name="scale5" value="3" required><span>3</span></label>
+                        <label><input type="radio" name="scale5" value="4" required><span>4</span></label>
+                        <label><input type="radio" name="scale5" value="5" required><span>5</span></label>
+                        <label><input type="radio" name="scale5" value="6" required><span>6</span></label>
+                        <label><input type="radio" name="scale5" value="7" required><span>7</span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="prevSection()">Kembali</button>
+                <button class="btn-primary" onclick="submitSurvey()">Kirim Jawaban</button>
+            </div>
+        </section>
+
+        <!-- Section 7: Thank You -->
+        <section id="section-thankyou" class="section">
+            <div class="thankyou-container">
+                <div class="thankyou-icon">✓</div>
+                <h1>Terima Kasih!</h1>
+                <p>Jawaban Anda telah berhasil disimpan.</p>
+                <p>Terima kasih atas partisipasi Anda dalam penelitian ini.</p>
+                <p class="thankyou-note">Data Anda sangat berharga untuk penelitian kami.</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Mengirim data...</p>
+    </div>
+
+    <script src="js/survey.js"></script>
+</body>
+</html>
