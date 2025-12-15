@@ -1,6 +1,6 @@
 // ===== CONFIGURATION =====
 // Ganti dengan URL Google Apps Script Web App kamu
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyegQKoKDjkPPGmTeccjMxpA0BDbTK6wpGusl4ciOaJ6HZjyllF49QsDhFCEkuxfYvyHQ/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOFqjaOt8PXBujo68Q4RdJ5rgtEZcxKXudcUxUIfSJYzycQJu3w0ig_CcOtmRuyseoeA/exec';
 
 // ===== GLOBAL VARIABLES =====
 let currentSection = 0;

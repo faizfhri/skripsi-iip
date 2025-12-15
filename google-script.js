@@ -2,7 +2,7 @@
 // Deploy ini sebagai Web App di Google Apps Script
 
 // KONFIGURASI
-const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE'; // Ganti dengan ID Google Sheets kamu
+const SPREADSHEET_ID = '1zMtqskWmZD9bXQ6wkS1sSipjzbBQalV0aS5riFU7IKM'; // Ganti dengan ID Google Sheets kamu
 const SHEET_NAME = 'Responses'; // Nama sheet untuk data responses
 const TRACKING_SHEET_NAME = 'Tracking'; // Nama sheet untuk tracking assignment
 
